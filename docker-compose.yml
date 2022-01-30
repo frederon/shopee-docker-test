@@ -1,19 +1,24 @@
 version: "3"
 
 services:
-  redis:
+  redis-server:
     image: redis
-    container_name: redis
-    restart: always
+    container_name: redis-server
     networks:
       - app-network
+    restart: always
   api:
     build:
       context: .
     container_name: api-server
     restart: unless-stopped
+    networks:
+      - app-network
     environment:
-      port: 80
+      - NODE_ENV=production
+      - port=80
+    links:
+      - redis-server
     ports:
       - 80:80
 

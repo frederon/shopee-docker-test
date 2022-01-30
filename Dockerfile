@@ -6,4 +6,4 @@ RUN npm install
 COPY . .
 
 EXPOSE 80
-CMD [ "node", ".bin/www" ]
+CMD [ "node", "./bin/www" ]
