@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  redis:
+    image: redis
+    container_name: redis
+    restart: always
+    networks:
+      - app-network
+  api:
+    build:
+      context: .
+    container_name: api-server
+    restart: unless-stopped
+    environment:
+      port: 80
+    ports:
+      - 80:80
+
+networks:
+  app-network:
+    driver: bridge
